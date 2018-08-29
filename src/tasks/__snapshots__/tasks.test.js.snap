@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tasks tests Tasks component renders correctly 1`] = `
+<div
+  className="mt-5 w-50"
+>
+  <h2
+    className="text-center"
+  >
+    To Do List
+  </h2>
+  <div
+    className="input-group mb-3"
+  >
+    <input
+      className="form-control"
+      id="input-new-task"
+      onChange={[Function]}
+      placeholder="New task..."
+      type="text"
+      value=""
+    />
+    <div
+      className="input-group-append"
+    >
+      <button
+        className="btn btn-outline-success"
+        id="add-new-task-button"
+        onClick={[Function]}
+        type="button"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+  <ul
+    className="list-group"
+  >
+    <li
+      className="list-group-item"
+    >
+      <button
+        className="btn btn-danger float-right"
+        id="delete-task-button"
+        onClick={[Function]}
+      >
+        Delete
+      </button>
+      <p
+        className="pr-3"
+      >
+        Just do it!
+      </p>
+      <button
+        className="btn btn-info float-right mr-2"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+    </li>
+    <li
+      className="list-group-item"
+    >
+      <button
+        className="btn btn-danger float-right"
+        id="delete-task-button"
+        onClick={[Function]}
+      >
+        Delete
+      </button>
+      <p
+        className="pr-3"
+      >
+        Go running!
+      </p>
+      <button
+        className="btn btn-info float-right mr-2"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+    </li>
+  </ul>
+</div>
+`;

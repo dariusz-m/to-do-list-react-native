@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test whole the app can be rendered 1`] = `
+<form
+  className="form-signin mt-5"
+>
+  <h1
+    className="h3 mb-3 font-weight-normal"
+  >
+    Sign In
+  </h1>
+  <label
+    className="sr-only"
+    htmlFor="username"
+  >
+    Username
+  </label>
+  <input
+    autoFocus={true}
+    className="form-control"
+    id="username"
+    onChange={[Function]}
+    placeholder="Username"
+    required={true}
+    type="text"
+    value=""
+  />
+  <label
+    className="sr-only"
+    htmlFor="inputPassword"
+  >
+    Password
+  </label>
+  <input
+    className="form-control"
+    id="inputPassword"
+    onChange={[Function]}
+    placeholder="Password"
+    required={true}
+    type="password"
+    value=""
+  />
+  <button
+    className="btn btn-lg btn-primary btn-block"
+    onClick={[Function]}
+    type="submit"
+  >
+    Sign in
+  </button>
+</form>
+`;

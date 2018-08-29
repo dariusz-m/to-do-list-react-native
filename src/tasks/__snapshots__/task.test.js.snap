@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task tests Task component renders correctly with editing mode 1`] = `
+<li
+  className="list-group-item"
+>
+  <button
+    className="btn btn-danger float-right"
+    id="delete-task-button"
+    onClick={[Function]}
+  >
+    Delete
+  </button>
+  <input
+    className="pr-3"
+    onChange={[Function]}
+    value="Go running!"
+  />
+  <button
+    className="btn btn-primary float-right mr-2"
+    onClick={[Function]}
+  >
+    Cancel
+  </button>
+  <button
+    className="btn btn-warning float-right mr-2"
+    id="update-task-button"
+    onClick={[Function]}
+  >
+    Update
+  </button>
+</li>
+`;
+
+exports[`Task tests Task component renders correctly without editing mode 1`] = `
+<li
+  className="list-group-item"
+>
+  <button
+    className="btn btn-danger float-right"
+    id="delete-task-button"
+    onClick={[Function]}
+  >
+    Delete
+  </button>
+  <p
+    className="pr-3"
+  >
+    Go running!
+  </p>
+  <button
+    className="btn btn-info float-right mr-2"
+    onClick={[Function]}
+  >
+    Edit
+  </button>
+</li>
+`;
