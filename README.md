@@ -1,4 +1,4 @@
-# To-do-list - Building application for android and ios using react-native, step by step
+# To-do-list - Building application for android and ios using react-native, migration from web-ui to react-native
 redux-native, react, redux, jest, eslint
 
 # Requirements
