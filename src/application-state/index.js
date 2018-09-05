@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import createSagaMiddleware from 'redux-saga';
 
 import reducers from './reducers';
@@ -16,8 +15,15 @@ export default function configureStore(initialState = INITIAL_STATE) {
     const store = createStore(
         reducers,
         initialState,
-        composeWithDevTools(applyMiddleware(sagaMiddleware)),
+        applyMiddleware(sagaMiddleware),
     );
+
+    if (module.hot) {
+        module.hot.accept('./reducers', () => {
+            const nextRootReducer = require('./reducers');
+            store.replaceReducer(nextRootReducer);
+        });
+    }
 
     sagaMiddleware.run(rootSaga);
 

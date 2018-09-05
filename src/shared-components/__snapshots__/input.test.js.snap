@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component renders correctly 1`] = `
+<View>
+  <Text>
+    Label
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    autoCorrect={true}
+    onChangeText={[MockFunction]}
+    placeholder="Placeholder..."
+    style={Object {}}
+    underlineColorAndroid="transparent"
+    value="value"
+  />
+</View>
+`;

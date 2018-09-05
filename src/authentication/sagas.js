@@ -1,7 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 
 import config from '../config';
-import { redirectTo } from '../browser-history';
 import { storeAccessToken } from './access-token';
 import { loginFailed, userHasBeenLoggedIn } from './actions';
 import { ROUTING_PATH } from '../routing';
@@ -26,7 +25,7 @@ export function* login(action) {
         const responseData = yield call([response, response.json]);
         if (response.status === 200) {
             yield call(storeAccessToken, responseData.accessToken);
-            yield call(redirectTo, ROUTING_PATH.HOME);
+            // yield call(redirectTo, ROUTING_PATH.HOME);
             yield put(userHasBeenLoggedIn());
         } else {
             yield put(loginFailed(responseData.errorMessage));

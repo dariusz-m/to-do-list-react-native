@@ -1,68 +1,90 @@
-// import './style.less';
-//
-// import React from 'react';
-// import { Provider } from 'react-redux';
-// import {
-//     Router, Route, Switch, Redirect,
-// } from 'react-router-dom';
-//
-// import configureStore from './application-state';
-// import history from './browser-history';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { StyleSheet, Text, View } from 'react-native';
+import {
+    NativeRouter, Route, Switch, Redirect, Link,
+} from 'react-router-native';
+
 // import Tasks from './tasks/tasks';
 // import Login from './authentication/login';
-// import { isUserAuthenticated } from './authentication/auth';
-// import { ROUTING_PATH } from './routing';
-//
-// /**
-//  *
-//  * @param {React.Component} Component - Protected component
-//  * @param {Object} rest - Rest of the properties
-//  * @returns {React.Component}
-//  */
-// const ProtectedRoute = ({ component: Component, ...rest }) => (
-//     <Route {...rest} render={props => (
-//         isUserAuthenticated() ? <Component {...props} /> : <Redirect to={ROUTING_PATH.LOGIN} />
-//     )}/>
-// );
-//
-// const store = configureStore();
-//
-// /**
-//  * To-do app.
-//  * @returns {React.Component}
-//  */
-// export default () => (
-//     <Provider store={store}>
-//         <Router history={history}>
-//             <Switch>
-//                 <ProtectedRoute exact path={ROUTING_PATH.HOME} component={Tasks}/>
-//                 <Route path={ROUTING_PATH.LOGIN} component={Login}/>
-//                 <Redirect to={ROUTING_PATH.HOME}/>
-//             </Switch>
-//         </Router>
-//     </Provider>
-// );
+import { isUserAuthenticated } from './authentication/auth';
+import { ROUTING_PATH } from './routing';
+import configureStore from './application-state';
 
 
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+const store = configureStore();
 
 /**
- * App component
+ *
+ * @param {React.Component} Component - Protected component
+ * @param {boolean} isAuthenticated - Is user authenticated
+ * @param {Object} rest - Rest of the properties
+ * @returns {React.Component}
  */
-export default class App extends Component {
+const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+    <Route {...rest} render={props => (
+        isAuthenticated ? <Component {...props} /> : <Redirect to={ROUTING_PATH.LOGIN} />
+    )}/>
+);
+
+
+/**
+ * Application component
+ */
+class App extends React.Component {
+    state = {
+        isAuthenticated: false,
+    };
+
+    /**
+     * Run when component just have mounted.
+     */
+    async componentDidMount() {
+        try {
+            const isAuthenticated = await isUserAuthenticated();
+            this.setState({ isAuthenticated: true });
+        } catch (err) {
+            this.setState({ isAuthenticated: false });
+        }
+    }
+
     /**
      * Render
-     * @returns {*}
+     * @returns {string}
      */
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>To-do list!</Text>
+                <Provider store={store}>
+                    <NativeRouter>
+                        <View>
+                            <Link
+                                to={ROUTING_PATH.HOME}
+                            >
+                                <Text>Home</Text>
+                            </Link>
+                            <Link
+                                to={ROUTING_PATH.LOGIN}>
+                                <Text>Login</Text>
+                            </Link>
+                            <Switch>
+                                <Route path={ROUTING_PATH.LOGIN} component={() => <Text>Login component2</Text>}/>
+                                <ProtectedRoute
+                                    isAuthenticated={this.state.isAuthenticated}
+                                    path={ROUTING_PATH.HOME}
+                                    component={() => <Text>Home component</Text>}
+                                />
+                            </Switch>
+                        </View>
+
+                    </NativeRouter>
+                </Provider>
             </View>
         );
     }
 }
+
+export default App;
 
 const styles = StyleSheet.create({
     container: {
@@ -70,15 +92,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
     },
 });
