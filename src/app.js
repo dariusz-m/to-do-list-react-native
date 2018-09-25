@@ -1,16 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
-    NativeRouter, Route, Switch, Redirect, Link,
-} from 'react-router-native';
+    Router, Route, Switch, Redirect,
+} from 'react-router';
 
-// import Tasks from './tasks/tasks';
-// import Login from './authentication/login';
+import Tasks from './tasks/tasks';
+import Login from './authentication/login';
 import { isUserAuthenticated } from './authentication/auth';
-import { ROUTING_PATH } from './routing';
+import { ROUTING_PATH, history } from './routing';
 import configureStore from './application-state';
-
 
 const store = configureStore();
 
@@ -42,7 +41,7 @@ class App extends React.Component {
     async componentDidMount() {
         try {
             const isAuthenticated = await isUserAuthenticated();
-            this.setState({ isAuthenticated: true });
+            this.setState({ isAuthenticated });
         } catch (err) {
             this.setState({ isAuthenticated: false });
         }
@@ -56,28 +55,16 @@ class App extends React.Component {
         return (
             <View style={styles.container}>
                 <Provider store={store}>
-                    <NativeRouter>
-                        <View>
-                            <Link
-                                to={ROUTING_PATH.HOME}
-                            >
-                                <Text>Home</Text>
-                            </Link>
-                            <Link
-                                to={ROUTING_PATH.LOGIN}>
-                                <Text>Login</Text>
-                            </Link>
-                            <Switch>
-                                <Route path={ROUTING_PATH.LOGIN} component={() => <Text>Login component2</Text>}/>
-                                <ProtectedRoute
-                                    isAuthenticated={this.state.isAuthenticated}
-                                    path={ROUTING_PATH.HOME}
-                                    component={() => <Text>Home component</Text>}
-                                />
-                            </Switch>
-                        </View>
-
-                    </NativeRouter>
+                    <Router history={history}>
+                        <Switch>
+                            <Route path={ROUTING_PATH.LOGIN} component={Login}/>
+                            <ProtectedRoute
+                                isAuthenticated={this.state.isAuthenticated}
+                                path={ROUTING_PATH.HOME}
+                                component={Tasks}
+                            />
+                        </Switch>
+                    </Router>
                 </Provider>
             </View>
         );

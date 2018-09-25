@@ -9,9 +9,7 @@ const ACCESS_TOKEN_KEY = 'access-token';
 export const storeAccessToken = async (token) => {
     try {
         await AsyncStorage.setItem(ACCESS_TOKEN_KEY, token);
-    } catch (error) {
-        console.log(error);
-    }
+    } catch (error) {}
 };
 
 /**
@@ -32,7 +30,5 @@ export const getAccessToken = async () => {
 export const removeAccessToken = async () => {
     try {
         await AsyncStorage.removeItem(ACCESS_TOKEN_KEY);
-    } catch (error) {
-        console.log(error);
-    }
+    } catch (error) {}
 };

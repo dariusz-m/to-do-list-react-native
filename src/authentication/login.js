@@ -1,9 +1,11 @@
 import React from 'react';
+import { Text, View, Button } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { login } from './actions';
+import Input from '../shared-components/input';
 
 /**
  * Login component.
@@ -24,56 +26,62 @@ export class Login extends React.Component {
     /**
      * On username change.
      *
-     * @param {Event} changeEvent: Change event.
+     * @param {string} value: Input value
      */
-    usernameChange = (changeEvent) => {
-        this.setState({ username: changeEvent.target.value });
+    usernameChange = (value) => {
+        this.setState({ username: value });
     };
 
     /**
      * On password change.
      *
-     * @param {Event} changeEvent: Change event.
+     * @param {string} value: Input value
      */
-    passwordChange = (changeEvent) => {
-        this.setState({ password: changeEvent.target.value });
+    passwordChange = (value) => {
+        this.setState({ password: value });
     };
 
     /**
      * Login.
-     *
-     * @param {Event} clickEvent: Click event.
      */
-    login = (clickEvent) => {
+    login = () => {
         this.props.actions.login(this.state.username, this.state.password);
         this.setState({ password: '' });
-        clickEvent.preventDefault();
     };
 
     /**
      * Render component.
      *
-     * @returns {React.Element}
+     * @returns {JSXElement}
      */
     render() {
         return (
-            <form className="form-signin mt-5">
-                <h1 className="h3 mb-3 font-weight-normal">Sign In</h1>
-                <label htmlFor="username" className="sr-only">Username</label>
-                <input type="text" id="username" className="form-control" placeholder="Username" required
-                    autoFocus value={this.state.username} onChange={this.usernameChange}/>
-                <label htmlFor="inputPassword" className="sr-only">Password</label>
-                <input type="password" id="inputPassword" className="form-control" placeholder="Password"
-                    required value={this.state.password} onChange={this.passwordChange}/>
-                <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>
-                    Sign in
-                </button>
+            <View style={{ textAlign: 'center' }}>
+                <Text style={{ fontSize: 40, fontWeight: 'bold' }}>Sign In</Text>
+                <Input
+                    placeholder={'username...'}
+                    onChange={this.usernameChange}
+                    label={'Username: '}
+                    autoCorrect={true}
+                    secureTextEntry={false}
+                    value={this.state.username}
+                />
+                <Input
+                    placeholder={'password...'}
+                    onChange={this.passwordChange}
+                    label={'Password: '}
+                    autoCorrect={true}
+                    secureTextEntry={true}
+                    value={this.state.password}
+                />
+                <Button onPress={this.login} title={'Sign in'} color={'blue'}/>
                 {this.props.errorMessage
-                    ? <div className="alert alert-danger">
-                        <strong>Login failed!</strong> {this.props.errorMessage}
-                    </div> : null
+                    ? <Text style={{ color: 'red', textAlign: 'center' }}>
+                        <Text>Login failed!{'\n'}</Text>
+                        <Text>{this.props.errorMessage}</Text>
+                    </Text> : null
                 }
-            </form>
+            </View>
         );
     }
 }

@@ -5,20 +5,26 @@ import {
 } from 'react-native';
 
 /** *
- * Input component
+ * Input
  *
- * @param props {Object} - Props object
- * @returns {string}
+ * @param {Object} props  - Props object
+ * @param {string} props.label - Label text
+ * @param {string} props.placeholder - Placeholder
+ * @param {boolean} props.autoCorrect  - Auto correct
+ * @param {string|number} props.value  - Input value
+ * @param {boolean} props.secureTextEntry  - Secure text
+ * @param {function} props.onChange  - On change
+ * @returns {JSXElement}
  */
-
 const Input = props => (
     <View>
-        <Text>{props.label}</Text>
+        <Text style={{ fontWeight: 'bold' }}>{props.label}</Text>
         <TextInput
             placeholder={props.placeholder}
             autoCorrect={props.autoCorrect}
             style={styles.inputStyle}
             value={props.value}
+            secureTextEntry={props.secureTextEntry}
             onChangeText={props.onChange}
         />
     </View>
@@ -32,11 +38,16 @@ Input.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]).isRequired,
+    secureTextEntry: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
-    inputStyle: {},
+    inputStyle: {
+        borderColor: 'black',
+        borderWidth: 0.2,
+        height: 40,
+    },
 });
 
 export default Input;

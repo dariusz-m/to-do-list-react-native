@@ -2,7 +2,13 @@
 
 exports[`Input component renders correctly 1`] = `
 <View>
-  <Text>
+  <Text
+    style={
+      Object {
+        "fontWeight": "bold",
+      }
+    }
+  >
     Label
   </Text>
   <TextInput
@@ -10,7 +16,14 @@ exports[`Input component renders correctly 1`] = `
     autoCorrect={true}
     onChangeText={[MockFunction]}
     placeholder="Placeholder..."
-    style={Object {}}
+    secureTextEntry={false}
+    style={
+      Object {
+        "borderColor": "black",
+        "borderWidth": 0.2,
+        "height": 40,
+      }
+    }
     underlineColorAndroid="transparent"
     value="value"
   />

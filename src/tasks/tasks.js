@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+    Text, View, Button, FlatList,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,6 +16,7 @@ import {
     updateTask,
 } from './actions';
 import { Task } from './task';
+import Input from '../shared-components/input';
 
 /**
  * Tasks component
@@ -97,10 +101,10 @@ export class Tasks extends React.Component {
 
     /**
      * Change new task value
-     * @param {Event} event - Change event.
+     * @param {string} value - Input value.
      */
-    onChangeNewTaskInputValue = (event) => {
-        this.props.actions.changeTheDescriptionOfTheNewTask(event.target.value);
+    onChangeNewTaskInputValue = (value) => {
+        this.props.actions.changeTheDescriptionOfTheNewTask(value);
     };
 
     /**
@@ -109,31 +113,29 @@ export class Tasks extends React.Component {
      */
     render() {
         return (
-            <div className={'mt-5 w-50'}>
-                <h2 className="text-center">To Do List</h2>
+            <View>
+                <Text style={{ fontWeight: 'bold' }}>To Do List</Text>
                 {this.props.errorMessage
-                    ? <div className="alert alert-danger">{this.props.errorMessage}</div>
+                    ? <Text style={{ color: 'red' }}>{this.props.errorMessage}</Text>
                     : null
                 }
-                <div className="input-group mb-3">
-                    <input type="text" className="form-control" id="input-new-task" placeholder="New task..."
-                        value={this.props.newTask} onChange={this.onChangeNewTaskInputValue}/>
-                    <div className="input-group-append">
-                        <button
-                            className="btn btn-outline-success"
-                            type="button"
-                            id="add-new-task-button"
-                            onClick={this.addNewTask}
-                        >
-                            Add
-                        </button>
-                    </div>
-                </div>
-                <ul className="list-group">
-                    {this.props.tasks.map((task) => {
+                <View style={{ paddingBottom: 30 }}>
+                    <Input
+                        placeholder={'task...'}
+                        onChange={this.onChangeNewTaskInputValue}
+                        label={'Add new Task: '}
+                        autoCorrect={true}
+                        secureTextEntry={false}
+                        value={this.props.newTask}
+                    />
+                    <Button onPress={this.addNewTask} title={'Add'} color={'blue'}/>
+                </View>
+                <FlatList
+                    data={[...this.props.tasks]}
+                    keyExtractor={task => task.id.toString()}
+                    renderItem={({ item: task }) => {
                         const isTaskEditing = this.props.editingTask ? this.props.editingTask.id === task.id : false;
                         return <Task
-                            key={task.id}
                             task={isTaskEditing ? this.props.editingTask : task}
                             deleteTask={this.deleteTask}
                             editTask={this.editTask}
@@ -142,9 +144,9 @@ export class Tasks extends React.Component {
                             cancelEditingTask={this.cancelEditingTask}
                             changeEditingTask={this.changeEditingTask}
                         />;
-                    })}
-                </ul>
-            </div>
+                    }}
+                />
+            </View>
         );
     }
 }

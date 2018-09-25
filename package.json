@@ -8,9 +8,11 @@
     "lint": "eslint --config linter/.eslintrc --ignore-path linter/.eslintignore src/ "
   },
   "dependencies": {
+    "history": "^4.7.2",
     "react": "^16.4.1",
     "react-native": "^0.56.0",
     "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
     "react-router-native": "^4.3.0",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0"
@@ -35,8 +37,15 @@
   },
   "jest": {
     "preset": "react-native",
+    "setupFiles": [
+      "<rootDir>/setup-jest.js"
+    ],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
-    }
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/src/config/config.test.js",
+      "<rootDir>/noded_modules/"
+    ]
   }
 }

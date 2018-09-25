@@ -14,6 +14,7 @@ const DEFAULT_ERROR_MESSAGE = 'Something went wrong, try again.';
  */
 export function* getTasks() {
     try {
+        const accessToken = yield call(getAccessToken);
         const response = yield call(
             fetch,
             `${config.API_URL}tasks`,
@@ -21,7 +22,7 @@ export function* getTasks() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${getAccessToken()}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
             },
         );
@@ -42,6 +43,7 @@ export function* getTasks() {
  */
 export function* addTaskToDo(action) {
     try {
+        const accessToken = yield call(getAccessToken);
         const response = yield call(
             fetch,
             `${config.API_URL}tasks`,
@@ -49,7 +51,7 @@ export function* addTaskToDo(action) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${getAccessToken()}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
                 body: JSON.stringify({ task: action.payload.task }),
             },
@@ -71,6 +73,7 @@ export function* addTaskToDo(action) {
  */
 export function* deleteTask(action) {
     try {
+        const accessToken = yield call(getAccessToken);
         const response = yield call(
             fetch,
             `${config.API_URL}tasks`,
@@ -78,7 +81,7 @@ export function* deleteTask(action) {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${getAccessToken()}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
                 body: JSON.stringify({ taskId: action.payload.taskId }),
             },
@@ -101,6 +104,7 @@ export function* deleteTask(action) {
  */
 export function* updateTask(action) {
     try {
+        const accessToken = yield call(getAccessToken);
         const response = yield call(
             fetch,
             `${config.API_URL}tasks`,
@@ -108,7 +112,7 @@ export function* updateTask(action) {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${getAccessToken()}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
                 body: JSON.stringify({ taskId: action.payload.taskId, newTaskDesc: action.payload.newTaskDesc }),
             },

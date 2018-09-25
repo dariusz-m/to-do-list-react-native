@@ -1,51 +1,134 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test whole the app can be rendered 1`] = `
-<form
-  className="form-signin mt-5"
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#F5FCFF",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
 >
-  <h1
-    className="h3 mb-3 font-weight-normal"
+  <View
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
   >
-    Sign In
-  </h1>
-  <label
-    className="sr-only"
-    htmlFor="username"
-  >
-    Username
-  </label>
-  <input
-    autoFocus={true}
-    className="form-control"
-    id="username"
-    onChange={[Function]}
-    placeholder="Username"
-    required={true}
-    type="text"
-    value=""
-  />
-  <label
-    className="sr-only"
-    htmlFor="inputPassword"
-  >
-    Password
-  </label>
-  <input
-    className="form-control"
-    id="inputPassword"
-    onChange={[Function]}
-    placeholder="Password"
-    required={true}
-    type="password"
-    value=""
-  />
-  <button
-    className="btn btn-lg btn-primary btn-block"
-    onClick={[Function]}
-    type="submit"
-  >
-    Sign in
-  </button>
-</form>
+    <Text
+      style={
+        Object {
+          "fontSize": 40,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Sign In
+    </Text>
+    <View>
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Username: 
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        autoCorrect={true}
+        onChangeText={[Function]}
+        placeholder="username..."
+        secureTextEntry={false}
+        style={
+          Object {
+            "borderColor": "black",
+            "borderWidth": 0.2,
+            "height": 40,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Password: 
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        autoCorrect={true}
+        onChangeText={[Function]}
+        placeholder="password..."
+        secureTextEntry={true}
+        style={
+          Object {
+            "borderColor": "black",
+            "borderWidth": 0.2,
+            "height": 40,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
+    <View
+      accessibilityComponentType="button"
+      accessibilityTraits={
+        Array [
+          "button",
+        ]
+      }
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+              Object {
+                "color": "blue",
+              },
+            ]
+          }
+        >
+          Sign in
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
 `;
